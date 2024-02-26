@@ -3,8 +3,7 @@ sequenceDiagram
     participant browser
     participant server
 
-    user->>browser: writes a new note: 'I love JS' in the form
-    user->>browser: clicks on button 'Save'
+    user->>browser: writes the new note: 'I love JS' in the form and clicks on button 'Save'
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note with note: {content: 'I love JS', date: new Date()} and request to redirect to '/notes'
     activate server
