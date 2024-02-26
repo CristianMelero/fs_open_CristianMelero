@@ -8,6 +8,7 @@ sequenceDiagram
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note with note: {content: 'I love JS', date: new Date()} and request to redirect to '/notes'
     activate server
     server->>server: Save the new note and redirect to '/notes'
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     server-->>browser: HTML document
     deactivate server
 
