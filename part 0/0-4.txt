@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant user
+    participant browser
+    participant server
+
+    user->>browser: writes a new note: 'I love JS' in the form
+    user->>browser: clicks on button 'Save'
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    browser->>server: {content: 'I love JS', date: new Date()} and request to redirect to '/notes'
+    activate server
+    server->>server: Save the new note and redirect to '/notes'
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server what includes the new note
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "'I love JS'", "date": "2024-2-23" }, ... ]
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes
